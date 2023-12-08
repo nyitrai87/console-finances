@@ -132,20 +132,32 @@ let totalProfit = 0;
 let totalLosses = 0;
 let grIncr = [];
 let grLoss = [];
-let avgChng = 0;
+let prevAmt = (finances[0])[1];
+let sumChange = 0;
+
 
 for (let i = 0; i < finances.length; i++) {
+  let currAmt = (finances[i])[1];
   if ((finances[i])[1] > 0) {
-    totalProfit += (finances[i])[1];
+    totalProfit += currAmt;
   } else {
-    totalLosses += (finances[i])[1];
+    totalLosses += currAmt;
   }
 }
 
+for (let i = 1; i < finances.length; i++) {
+  let currAmt = (finances[i])[1];
+  let change = currAmt - prevAmt;
+  sumChange += change;
+  prevAmt = currAmt;
+}
+
+let avgChng = sumChange / (months - 1);
 let total = totalProfit + totalLosses;
 
 console.log(
   `Financial Analysis
 ----------------
 Total Months: ${months}
-Total: $${total}`);
+Total: $${total}
+Average Change: ${avgChng}`);
