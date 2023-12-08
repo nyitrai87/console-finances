@@ -133,3 +133,19 @@ let totalLosses = 0;
 let grIncr = [];
 let grLoss = [];
 let avgChng = 0;
+
+for (let i = 0; i < finances.length; i++) {
+  if ((finances[i])[1] > 0) {
+    totalProfit += (finances[i])[1];
+  } else {
+    totalLosses += (finances[i])[1];
+  }
+}
+
+let total = totalProfit + totalLosses;
+
+console.log(
+  `Financial Analysis
+----------------
+Total Months: ${months}
+Total: $${total}`);
