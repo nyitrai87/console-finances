@@ -133,8 +133,8 @@ let totalLosses = 0;
 let grIncr = [];
 let grLoss = [];
 let prevAmt = (finances[0])[1];
+let prevChange = 0;
 let sumChange = 0;
-
 
 for (let i = 0; i < finances.length; i++) {
   let currAmt = (finances[i])[1];
@@ -149,6 +149,11 @@ for (let i = 1; i < finances.length; i++) {
   let currAmt = (finances[i])[1];
   let change = currAmt - prevAmt;
   sumChange += change;
+
+  if (change > prevChange) {
+    grIncr = [(finances[i])[0], change];
+    prevChange = change;
+  }
   prevAmt = currAmt;
 }
 
@@ -160,4 +165,5 @@ console.log(
 ----------------
 Total Months: ${months}
 Total: $${total}
-Average Change: ${avgChng}`);
+Average Change: ${avgChng}
+Greatest Increase in Profits/Losses: ${grIncr[0]} ($${grIncr[1]})`);
