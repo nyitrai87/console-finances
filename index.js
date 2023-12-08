@@ -131,9 +131,10 @@ let months = finances.length;
 let totalProfit = 0;
 let totalLosses = 0;
 let grIncr = [];
-let grLoss = [];
+let grDecr = [];
 let prevAmt = (finances[0])[1];
-let prevChange = 0;
+let prevIncr = 0;
+let prevDecr = 0;
 let sumChange = 0;
 
 for (let i = 0; i < finances.length; i++) {
@@ -150,9 +151,14 @@ for (let i = 1; i < finances.length; i++) {
   let change = currAmt - prevAmt;
   sumChange += change;
 
-  if (change > prevChange) {
+  if (change > prevIncr) {
     grIncr = [(finances[i])[0], change];
-    prevChange = change;
+    prevIncr = change;
+  }
+
+  if (change < prevDecr) {
+    grDecr = [(finances[i])[0], change];
+    prevDecr = change;
   }
   prevAmt = currAmt;
 }
@@ -162,8 +168,9 @@ let total = totalProfit + totalLosses;
 
 console.log(
   `Financial Analysis
-----------------
+------------------
 Total Months: ${months}
 Total: $${total}
-Average Change: ${avgChng}
-Greatest Increase in Profits/Losses: ${grIncr[0]} ($${grIncr[1]})`);
+Average Change: $${avgChng.toFixed(2)}
+Greatest Increase in Profits/Losses: ${grIncr[0]} ($${grIncr[1]})
+Greatest Decrease in Profits/Losses: ${grDecr[0]} ($${grDecr[1]})`);
